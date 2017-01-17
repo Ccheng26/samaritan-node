@@ -24,7 +24,7 @@ app.listen(PORT, () => {
 
   // var search = req.body.search;
 
-var key = process.env.GUIDESTAR
+var key = process.env.GUIDESTAR + " " + process.env.KEY
 console.log(key)
 fetch('https://quickstartdata.guidestar.org/v1/quickstartsearch?q=ein:54-1774039',
   {
