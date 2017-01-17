@@ -7,6 +7,7 @@
   },
   "dependencies": {
     "bcryptjs": "^2.4.0",
+    "body-parser": "^1.15.2",
     "classnames": "^2.2.5",
     "component-webpack-plugin": "^0.2.1",
     "dotenv": "^4.0.0",
