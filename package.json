@@ -6,8 +6,18 @@
     "react-scripts": "0.8.5"
   },
   "dependencies": {
+    "bcryptjs": "^2.4.0",
+    "classnames": "^2.2.5",
+    "component-webpack-plugin": "^0.2.1",
+    "dotenv": "^4.0.0",
+    "express": "^4.14.0",
+    "express-session": "^1.14.2",
+    "fetch": "^1.1.0",
+    "morgan": "^1.7.0",
+    "pg-promise": "^5.5.2",
     "react": "^15.4.2",
-    "react-dom": "^15.4.2"
+    "react-dom": "^15.4.2",
+    "react-router": "^3.0.1"
   },
   "scripts": {
     "start": "react-scripts start",
