@@ -12,8 +12,8 @@ const app = require('./app'),
 
 dotenv.config({path: 'config.env'});
 
-// app.use(bodyParser.urlencoded({extended: true}));
-app.use(bodyParser.text({ type: 'text/html' }));
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json());
 
 app.listen(PORT, () => {
   console.log(`App listening on port ${PORT}!`)
@@ -39,33 +39,10 @@ app.listen(PORT, () => {
 // });
 
 
-var key = process.env.GUIDESTAR + " " + process.env.KEY
-console.log(key)
-// fetch('https://quickstartdata.guidestar.org/v1/quickstartsearch?q=ein:54-1774039',
-//   {
-//       headers: {
-//       'Authorization': `${key}`
-//       }})
-//   .then(
-//     function(response) {
-//       if (response.status !== 200) {
-//         console.log('Looks like there was a problem. Status Code: ' +
-//           response.status);
-//         return;
-//       }
 
-//       // Examine the text in the response
-//       response.json().then(function(data) {
-//         console.log(data);
-//       });
-//     }
-//   )
-//   .catch(function(err) {
-//     console.log('Fetch Error :-S', err);
-//   });
 app.post('/search', function (req,res) {
   // var search = req.query.search;
-    var search = req.body.text
+    var search = req.body.search
   // var SearchForm = React.renderToString(SearchFormFactory());
   // res.render('index', { Content: SearchForm});
   fetch('http://localhost:9000/search')
@@ -74,10 +51,35 @@ app.post('/search', function (req,res) {
     console.log(search)
     console.log("wheeeee")
     console.log('search')
-    var jsonObj = JSON.parse(response)
-    console.log(jsonObj)
-    return res.json(response)
+    // var jsonObj = JSON.parse(response)
+    // console.log(jsonObj)
+    // return res.json(response)
+var key = process.env.GUIDESTAR + " " + process.env.KEY
+console.log(key)
+fetch('https://quickstartdata.guidestar.org/v1/quickstartsearch?q=' + search,
+  {
+      headers: {
+      'Authorization': `${key}`
+      }})
+  .then(
+    function(response) {
+      if (response.status !== 200) {
+        console.log('Looks like there was a problem. Status Code: ' +
+          response.status);
+        return;
+      }
 
+      // Examine the text in the response
+      response.json().then(function(data) {
+        console.log(data);
+      });
+    }
+  )
+  .catch(function(err) {
+    console.log('Fetch Error :-S', err);
+  });
+  }).catch(function(error){
+    console.log('not today')
   })
 
 });

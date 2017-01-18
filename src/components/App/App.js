@@ -21,28 +21,31 @@ class App extends Component {
     asks[`ask-${timestamp}`] = ask;
     this.setState({ asks:asks})
   }
-  submitButton(e){
-    e.preventDefault();
-    const ask = {
-      listing: this.listing.value
-    }
-    var askVal = ask.listing
-    console.log(askVal)
-    this.doForm.reset();
-    this.setState({asks:ask});
-    this.queryList(ask);
-    console.log(ask);
-    fetch('http://localhost:9000/search', {
-      method: 'POST',
-      data: askVal,
-      mode: 'cors',
-      cache: 'default'
-    }).then(function(response) {
-      console.log(response.type)
-      // return response
-    })
-  }
-  // componentWillUpdate(){
+  // submitButton(e){
+  //   e.preventDefault();
+  //   const ask = {
+  //     listing: this.listing.value
+  //   }
+  //   var askVal = ask.listing
+  //   console.log(askVal)
+  //   this.doForm.reset();
+  //   this.setState({asks:ask});
+  //   this.queryList(ask);
+  //   console.log(ask);
+  //   fetch('http://localhost:9000/search', {
+  //     method: 'POST',
+  //     data: askVal,
+  //     mode: 'cors',
+  //     cache: 'default'
+  //   }).then(function(response) {
+  //     console.log(response.type)
+  //      response.body.asJSON()
+  //      .catch(function(err){
+  //         console.log("nope")
+  //       })
+  //   })
+  // }
+  // // componentWillUpdate(){
 
   //   };
 
@@ -57,12 +60,13 @@ class App extends Component {
           <h2>Welcome to React</h2>
         </div>
          <h1>Search NonProfits</h1>
-        <form method="POST" ref={(input)=> this.doForm =input} onSubmit={(e) => {this.submitButton(e)}}>
-        <input ref={(input=> this.listing = input)} />
-        <button type="submit">Submit</button>
-        </form>
+              <form action="http://localhost:9000/search" method="POST">
+       <input type="text" id="search" name="search" />
+       <input type="submit" id="searchbtn" value="Submit" />
+       </form>
 
         {/*
+
         {Object.keys(this.state.asks).map(key => <Asks key={key} list={this.state.asks[key]} />)
         }
         {console.log(this.state)}
