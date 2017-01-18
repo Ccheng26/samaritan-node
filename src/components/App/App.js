@@ -1,8 +1,8 @@
 import React, { PropTypes, Component } from 'react';
 import classnames from 'classnames'
-
 import logo from './logo.svg';
 import './style.css';
+// import Navbar from '../Navbar'
 // import Asks from '../Asks/index'
 
 class App extends Component {
@@ -28,23 +28,27 @@ class App extends Component {
   //   }
   //   var askVal = ask.listing
   //   console.log(askVal)
-  //   this.doForm.reset();
-  //   this.setState({asks:ask});
-  //   this.queryList(ask);
   //   console.log(ask);
+
   //   fetch('http://localhost:9000/search', {
   //     method: 'POST',
   //     data: askVal,
+  //     action: "http://localhost:9000/search",
   //     mode: 'cors',
   //     cache: 'default'
   //   }).then(function(response) {
   //     console.log(response.type)
-  //      response.body.asJSON()
-  //      .catch(function(err){
-  //         console.log("nope")
-  //       })
+  //      response.body.asJSON();
+  //       this.doForm.reset();
+  //       this.setState({asks:ask});
+  //       this.queryList(ask);
+  //   }).catch(function(err){
+  //       console.log("nope")
   //   })
   // }
+  // ref={(input)=> this.doForm =input}
+  //         onSubmit={(e) => {this.submitButton(e)}}
+  //         ref={(input=> this.listing = input)}
   // // componentWillUpdate(){
 
   //   };
@@ -55,14 +59,17 @@ class App extends Component {
     return (
       <div className={classnames('App', className)} >
         <div className="App-header">
-
           <img src={logo} className="App-logo" alt="logo" />
           <h2>Welcome to React</h2>
         </div>
-         <h1>Search NonProfits</h1>
-              <form action="http://localhost:9000/search" method="POST">
-       <input type="text" id="search" name="search" />
-       <input type="submit" id="searchbtn" value="Submit" />
+        <h1>Search NonProfits</h1>
+        <form
+          action="http://localhost:9000/search"
+          method="POST"
+          >
+          <input type="text" id="search" name="search" />
+          <input type="submit" id="searchbtn" value="Submit"
+          />
        </form>
 
         {/*

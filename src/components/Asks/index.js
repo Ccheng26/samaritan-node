@@ -1,6 +1,6 @@
 import React, { PropTypes, Component } from 'react';
 import classnames from 'classnames';
-
+import { Link } from 'react-router';
 import './style.css';
 
 export default class Asks extends Component {

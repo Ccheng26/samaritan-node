@@ -15,12 +15,13 @@ app.use(express.static(path.resolve(__dirname, '..', 'build')));
 
 
 
-app.get('*', (req, res) => {
-  console.log("check")
-  res.sendFile(path.resolve(__dirname, '..', 'build', 'index.html'));
-  // res.render('index')
-});
-//add execption
+// app.get('*', (req, res) => {
+//   console.log("check")
+//   res.sendFile(path.resolve(__dirname, '..', 'build', 'index.html'));
+//   // res.render('index')
+// });
+// //add exception for other routes
+
 console.log('app.js')
 
 

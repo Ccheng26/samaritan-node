@@ -8,7 +8,9 @@ const app = require('./app'),
       bcrypt = require('bcryptjs'),
       fetch = require('node-fetch'),
       dotenv = require('dotenv'),
-      bodyParser = require('body-parser');
+      bodyParser = require('body-parser'),
+      express = require('express'),
+      router = express.Router();
 
 dotenv.config({path: 'config.env'});
 
@@ -38,53 +40,56 @@ app.listen(PORT, () => {
 //   res.render('index',data)
 // });
 
-
-
+var something = [];
+// request for search parameter and plug into the api
 app.post('/search', function (req,res) {
   // var search = req.query.search;
-    var search = req.body.search
+  var search = req.body.search
   // var SearchForm = React.renderToString(SearchFormFactory());
   // res.render('index', { Content: SearchForm});
   fetch('http://localhost:9000/search')
   .then(function(response){
-    console.log(response)
+    var key = process.env.GUIDESTAR + " " + process.env.KEY
+    // console.log(key)
     console.log(search)
-    console.log("wheeeee")
-    console.log('search')
-    // var jsonObj = JSON.parse(response)
-    // console.log(jsonObj)
-    // return res.json(response)
-var key = process.env.GUIDESTAR + " " + process.env.KEY
-console.log(key)
-fetch('https://quickstartdata.guidestar.org/v1/quickstartsearch?q=' + search,
-  {
-      headers: {
-      'Authorization': `${key}`
-      }})
-  .then(
-    function(response) {
-      if (response.status !== 200) {
-        console.log('Looks like there was a problem. Status Code: ' +
-          response.status);
-        return;
-      }
-
-      // Examine the text in the response
+    fetch('https://quickstartdata.guidestar.org/v1/quickstartsearch?q=' + search,
+      {headers: {'Authorization': `${key}`}})
+    .then(function(response) { // check if fetch request goes through
+      if (response.status !== 200) { // if not successful, error
+        console.log('Error Status Code: ' + response.status);
+        }
       response.json().then(function(data) {
-        console.log(data);
-      });
-    }
-  )
-  .catch(function(err) {
-    console.log('Fetch Error :-S', err);
-  });
-  }).catch(function(error){
-    console.log('not today')
+      // if response is 200, check data
+        console.log("*****************")
+        var parse = data.hits
+        parse.forEach(function(e){
+          var name = e.organization_name
+          var address= `${e.city} ${e.state} ${e.zip}`
+          something.push({name, address})
+        })
+      })
+      console.log('8888888888838838383838838383838383838838383')
+      // console.log(data)
+      })
+    .catch(function(err) { // if error with guidestar fetch request
+      console.log('Fetch Error :-S', err); // log the error
+      })
+    })
+  .catch(function(error){ // if error with the search fetch request
+    console.log('Fetch Error :-S', error); // log this error
   })
+  // res.render('index', search)
+  console.log(search)
+  console.log("-------------")
 
 });
 
+app.get('/search', function(req,res) {
+  res.send(something);
+})
 
+
+module.exports = router;
 
 
 
