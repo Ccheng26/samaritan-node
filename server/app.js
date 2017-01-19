@@ -5,7 +5,7 @@ const express = require('express'),
   morgan = require('morgan'),
   path = require('path'),
   React = require('react');
-// var SearchFormFactory = React.createFactory(require('../src/contact-form.jsx'))
+
 
 // Setup logger
 app.use(morgan(':remote-addr - :remote-user [:date[clf]] ":method :url HTTP/:http-version" :status :res[content-length] :response-time ms'));
