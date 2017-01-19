@@ -1,11 +1,10 @@
 // require('node-jsx').install({extension: '.jsx'});
-
 const express = require('express'),
-      app = express(),
-      // for http request logging
-      morgan = require('morgan'),
-      path = require('path'),
-      React = require('react');
+  app = express(),
+  // for http request logging
+  morgan = require('morgan'),
+  path = require('path'),
+  React = require('react');
 // var SearchFormFactory = React.createFactory(require('../src/contact-form.jsx'))
 
 // Setup logger
@@ -26,8 +25,3 @@ console.log('app.js')
 
 
 module.exports = app;
-
-
-
-
-
